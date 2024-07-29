@@ -17,6 +17,7 @@ class TaskListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Tasks"
         self.taskListTableView.dataSource = self
         self.taskListTableView.delegate = self
         let taskCellNib = UINib(nibName: "TaskTableViewCell", bundle: nil)
@@ -36,5 +37,11 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
         return taskCell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailsViewControllerDataSource = DetailsViewControllerDataSource(taskTitle: taskTitleList[indexPath.row], taskDescription: taskDescriptionList[indexPath.row])
+        let detailsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
+        detailsViewController.detailsViewControllerDataSource = detailsViewControllerDataSource
+        self.navigationController?.pushViewController(detailsViewController, animated: true)
+    }
     
 }
