@@ -18,6 +18,7 @@ class TaskListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Tasks"
+        self.taskListTableView.layer.opacity = 0.85
         self.taskListTableView.dataSource = self
         self.taskListTableView.delegate = self
         let taskCellNib = UINib(nibName: "TaskTableViewCell", bundle: nil)

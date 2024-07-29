@@ -32,6 +32,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="endlessRoad" translatesAutoresizingMaskIntoConstraints="NO" id="zLT-Ch-fNx">
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="QKF-mf-FLN">
                                 <rect key="frame" x="0.0" y="103" width="393" height="715"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -40,6 +43,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="zLT-Ch-fNx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="8dE-Ij-XHe"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="zLT-Ch-fNx" secondAttribute="bottom" id="QXF-Cv-HrL"/>
+                            <constraint firstItem="zLT-Ch-fNx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="YzM-qc-8Am"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zLT-Ch-fNx" secondAttribute="trailing" id="Zvv-ib-HiT"/>
                             <constraint firstItem="QKF-mf-FLN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ijy-Kk-iCU"/>
                             <constraint firstItem="QKF-mf-FLN" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="lAM-ly-Rb9"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="QKF-mf-FLN" secondAttribute="bottom" id="t5F-Es-Akx"/>
@@ -122,6 +129,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="endlessRoad" width="1024" height="772"/>
         <image name="hand.thumbsdown.circle" catalog="system" width="128" height="123"/>
         <image name="hand.thumbsup.circle" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
