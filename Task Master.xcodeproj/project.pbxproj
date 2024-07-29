@@ -109,15 +109,12 @@
 			children = (
 				F4C4CA322C558294002D2A9B /* AppDelegate.swift */,
 				F4C4CA342C558294002D2A9B /* SceneDelegate.swift */,
-				F4C4CA362C558294002D2A9B /* TaskListViewController.swift */,
-				F4C4CA762C577E72002D2A9B /* DetailsViewController.swift */,
-				F4C4CA382C558294002D2A9B /* Main.storyboard */,
-				F4C4CA3E2C558298002D2A9B /* Assets.xcassets */,
 				F4C4CA402C558298002D2A9B /* LaunchScreen.storyboard */,
+				F4C4CA382C558294002D2A9B /* Main.storyboard */,
+				F4C4CA7B2C579B0D002D2A9B /* LaunchScreenAnimation */,
+				F4C4CA792C5799E6002D2A9B /* TaskList */,
+				F4C4CA782C57997A002D2A9B /* Resources */,
 				F4C4CA432C558298002D2A9B /* Info.plist */,
-				F4C4CA3B2C558294002D2A9B /* Task_Master.xcdatamodeld */,
-				F4C4CA652C5589EA002D2A9B /* TaskTableViewCell.swift */,
-				F4C4CA662C5589EA002D2A9B /* TaskTableViewCell.xib */,
 			);
 			path = "Task Master";
 			sourceTree = "<group>";
@@ -137,6 +134,41 @@
 				F4C4CA582C558298002D2A9B /* Task_MasterUITestsLaunchTests.swift */,
 			);
 			path = "Task MasterUITests";
+			sourceTree = "<group>";
+		};
+		F4C4CA782C57997A002D2A9B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F4C4CA3E2C558298002D2A9B /* Assets.xcassets */,
+				F4C4CA3B2C558294002D2A9B /* Task_Master.xcdatamodeld */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		F4C4CA792C5799E6002D2A9B /* TaskList */ = {
+			isa = PBXGroup;
+			children = (
+				F4C4CA7A2C579A31002D2A9B /* TaskListCell */,
+				F4C4CA362C558294002D2A9B /* TaskListViewController.swift */,
+				F4C4CA762C577E72002D2A9B /* DetailsViewController.swift */,
+			);
+			path = TaskList;
+			sourceTree = "<group>";
+		};
+		F4C4CA7A2C579A31002D2A9B /* TaskListCell */ = {
+			isa = PBXGroup;
+			children = (
+				F4C4CA652C5589EA002D2A9B /* TaskTableViewCell.swift */,
+				F4C4CA662C5589EA002D2A9B /* TaskTableViewCell.xib */,
+			);
+			path = TaskListCell;
+			sourceTree = "<group>";
+		};
+		F4C4CA7B2C579B0D002D2A9B /* LaunchScreenAnimation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = LaunchScreenAnimation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
