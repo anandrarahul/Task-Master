@@ -20,6 +20,7 @@
 		F4C4CA672C5589EA002D2A9B /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C4CA652C5589EA002D2A9B /* TaskTableViewCell.swift */; };
 		F4C4CA682C5589EA002D2A9B /* TaskTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4C4CA662C5589EA002D2A9B /* TaskTableViewCell.xib */; };
 		F4C4CA772C577E72002D2A9B /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C4CA762C577E72002D2A9B /* DetailsViewController.swift */; };
+		F4C4CB142C5971AE002D2A9B /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C4CB132C5971AE002D2A9B /* AddTaskViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		F4C4CA652C5589EA002D2A9B /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		F4C4CA662C5589EA002D2A9B /* TaskTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskTableViewCell.xib; sourceTree = "<group>"; };
 		F4C4CA762C577E72002D2A9B /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		F4C4CB132C5971AE002D2A9B /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 			children = (
 				F4C4CA7A2C579A31002D2A9B /* TaskListCell */,
 				F4C4CA362C558294002D2A9B /* TaskListViewController.swift */,
+				F4C4CB132C5971AE002D2A9B /* AddTaskViewController.swift */,
 				F4C4CA762C577E72002D2A9B /* DetailsViewController.swift */,
 			);
 			path = TaskList;
@@ -309,6 +312,7 @@
 				F4C4CA3D2C558294002D2A9B /* Task_Master.xcdatamodeld in Sources */,
 				F4C4CA352C558294002D2A9B /* SceneDelegate.swift in Sources */,
 				F4C4CA772C577E72002D2A9B /* DetailsViewController.swift in Sources */,
+				F4C4CB142C5971AE002D2A9B /* AddTaskViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
