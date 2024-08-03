@@ -12,24 +12,36 @@ class TaskTableViewCell: UITableViewCell {
     @IBOutlet weak var taskDescription: UILabel!
     @IBOutlet weak var taskTitle: UILabel!
     @IBOutlet weak var selectionStatusButton: UIButton!
+    weak var delegate: SaveDetailsDelegate?
     
     @IBAction func selectionButtonTapped(_ sender: UIButton) {
+        var taskState: TaskListStatus
         if sender.isSelected == true {
             self.selectionStatusButton.setImage(UIImage(named: "unselected"), for: .normal)
+            taskState = .toDo
         } else {
             self.selectionStatusButton.setImage(UIImage(named: "selected"), for: .normal)
+            taskState = .done
         }
         sender.isSelected = !sender.isSelected
+        self.delegate?.updateTaskDetails(taskDetail: TaskDetails(title: self.taskTitle.text!, description: self.taskDescription.text, deadline: "soon"), taskStatus: taskState)
     }
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.selectionStatusButton.setImage(UIImage(named: "unselected"), for: .normal)
-        self.selectionStatusButton.isSelected = false
+//        self.selectionStatusButton.setImage(UIImage(named: "unselected"), for: .normal)
+//        self.selectionStatusButton.isSelected = false
     }
     
-    func setTaskDetails(title: String, desc: String, taskImage: String? = nil) {
-        self.taskTitle.text = title
-        self.taskDescription.text = desc
+    func setTaskDetails(taskDetails: TaskDetails, taskStatus: TaskListStatus) {
+        self.taskTitle.text = taskDetails.title
+        self.taskDescription.text = taskDetails.description ?? ""
+        if taskStatus == .done {
+            self.selectionStatusButton.setImage(UIImage(named: "selected"), for: .normal)
+            self.selectionStatusButton.isSelected = true
+        } else if taskStatus == .toDo {
+            self.selectionStatusButton.setImage(UIImage(named: "unselected"), for: .normal)
+            self.selectionStatusButton.isSelected = false
+        }
     }
     
 }

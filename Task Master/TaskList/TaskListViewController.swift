@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum TaskListSection: String, CaseIterable {
+enum TaskListStatus: String, CaseIterable {
     case toDo = "To Do"
     case done = "Done"
 }
@@ -16,9 +16,8 @@ class TaskListViewController: UIViewController {
 
     @IBOutlet weak var taskListTableView: UITableView!
     
-    var taskTitleList = ["Fish Food", "Water Plants", "Drink Water", "Cook Food", "Family Time"]
-    var taskDescriptionList = ["Fish Food keeps fishes alive.", "Water keeps Plants healthy, plants also need sunlight.", "Start your day with a glass of Water", "Cook delicious and healthy Food.", "Family Time is the best time."]
-    let taskDoneList = ["fish", "plants"]
+    var toDoTaskDetailsList =  [TaskDetails]()
+    var doneTaskDetailsList =  [TaskDetails]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,11 +40,11 @@ class TaskListViewController: UIViewController {
 extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        TaskListSection.allCases.count
+        TaskListStatus.allCases.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let taskSection = TaskListSection.allCases[safe: section] else {
+        guard let taskSection = TaskListStatus.allCases[safe: section] else {
             return nil
         }
         return taskSection.rawValue
@@ -59,7 +58,7 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.textColor = .systemBackground
         titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        titleLabel.text = TaskListSection.allCases[safe: section]?.rawValue
+        titleLabel.text = TaskListStatus.allCases[safe: section]?.rawValue
         headerView.addSubview(titleLabel)
         
         NSLayoutConstraint.activate([
@@ -77,47 +76,62 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let taskSection = TaskListSection.allCases[safe: section] else {
+        guard let taskSection = TaskListStatus.allCases[safe: section] else {
             return 0
         }
         
         switch taskSection {
         case .toDo:
-            return taskTitleList.count
+            return self.toDoTaskDetailsList.count
         case .done:
-            return taskDoneList.count
+            return self.doneTaskDetailsList.count
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let taskCell = self.taskListTableView.dequeueReusableCell(withIdentifier: "TaskTableViewCell", for: indexPath) as! TaskTableViewCell
         
-        guard let taskSection = TaskListSection.allCases[safe: indexPath.section] else {
+        guard let taskSection = TaskListStatus.allCases[safe: indexPath.section] else {
             return taskCell
         }
+        taskCell.delegate = self
         
         switch taskSection {
         case .toDo:
-            taskCell.setTaskDetails(title: taskTitleList[indexPath.row], desc: taskDescriptionList[indexPath.row])
+            taskCell.setTaskDetails(taskDetails: self.toDoTaskDetailsList[indexPath.row], taskStatus: .toDo)
         case .done:
-            taskCell.setTaskDetails(title: taskDoneList[indexPath.row], desc: taskDescriptionList[indexPath.row])
+            taskCell.setTaskDetails(taskDetails: self.doneTaskDetailsList[indexPath.row], taskStatus: .done)
         }
         return taskCell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailsViewControllerDataSource = DetailsViewControllerDataSource(taskTitle: taskTitleList[indexPath.row], taskDescription: taskDescriptionList[indexPath.row])
-        let detailsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
-        detailsViewController.detailsViewControllerDataSource = detailsViewControllerDataSource
-        self.navigationController?.pushViewController(detailsViewController, animated: true)
+        //        let detailsViewControllerDataSource = DetailsViewControllerDataSource(taskTitle: taskTitleList[indexPath.row], taskDescription: taskDescriptionList[indexPath.row])
+        //        let detailsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
+        //        detailsViewController.detailsViewControllerDataSource = detailsViewControllerDataSource
+        //        self.navigationController?.pushViewController(detailsViewController, animated: true)
     }
     
 }
 
 extension TaskListViewController: SaveDetailsDelegate {
-    func saveDetails(title: String, desc: String) {
-        self.taskTitleList.append(title)
-        self.taskDescriptionList.append(desc)
+    func saveDetails(taskDetail: TaskDetails) {
+        self.toDoTaskDetailsList.append(taskDetail)
+        self.taskListTableView.reloadData()
+    }
+    
+    func updateTaskDetails(taskDetail: TaskDetails, taskStatus: TaskListStatus) {
+        if taskStatus == .toDo {
+            if let currentIndex = self.doneTaskDetailsList.firstIndex(where: { $0.title == taskDetail.title && $0.description == taskDetail.description }) {
+                self.doneTaskDetailsList.remove(at: currentIndex)
+                self.toDoTaskDetailsList.append(taskDetail)
+            }
+        } else {
+            if let currentIndex = self.toDoTaskDetailsList.firstIndex(where: { $0.title == taskDetail.title && $0.description == taskDetail.description }) {
+                self.toDoTaskDetailsList.remove(at: currentIndex)
+                self.doneTaskDetailsList.append(taskDetail)
+            }
+        }
         self.taskListTableView.reloadData()
     }
 }
