@@ -33,8 +33,8 @@ class TaskTableViewCell: UITableViewCell {
     }
     
     func setTaskDetails(taskDetails: TaskDetails, taskStatus: TaskListStatus) {
-        self.taskTitle.text = taskDetails.title
-        self.taskDescription.text = taskDetails.description ?? ""
+        self.taskTitle.text = taskDetails.taskTitle
+        self.taskDescription.text = taskDetails.taskDescription ?? ""
         if taskStatus == .done {
             self.selectionStatusButton.setImage(UIImage(named: "selected"), for: .normal)
             self.selectionStatusButton.isSelected = true

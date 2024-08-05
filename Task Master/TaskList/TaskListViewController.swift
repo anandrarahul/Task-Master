@@ -122,12 +122,12 @@ extension TaskListViewController: SaveDetailsDelegate {
     
     func updateTaskDetails(taskDetail: TaskDetails, taskStatus: TaskListStatus) {
         if taskStatus == .toDo {
-            if let currentIndex = self.doneTaskDetailsList.firstIndex(where: { $0.title == taskDetail.title && $0.description == taskDetail.description }) {
+            if let currentIndex = self.doneTaskDetailsList.firstIndex(where: { $0.taskTitle == taskDetail.taskTitle && $0.taskDescription == taskDetail.taskDescription }) {
                 self.doneTaskDetailsList.remove(at: currentIndex)
                 self.toDoTaskDetailsList.append(taskDetail)
             }
         } else {
-            if let currentIndex = self.toDoTaskDetailsList.firstIndex(where: { $0.title == taskDetail.title && $0.description == taskDetail.description }) {
+            if let currentIndex = self.toDoTaskDetailsList.firstIndex(where: { $0.taskTitle == taskDetail.taskTitle && $0.taskDescription == taskDetail.taskDescription }) {
                 self.toDoTaskDetailsList.remove(at: currentIndex)
                 self.doneTaskDetailsList.append(taskDetail)
             }
