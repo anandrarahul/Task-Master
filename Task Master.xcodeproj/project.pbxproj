@@ -113,6 +113,7 @@
 			children = (
 				F4C4CA322C558294002D2A9B /* AppDelegate.swift */,
 				F4C4CA342C558294002D2A9B /* SceneDelegate.swift */,
+				F4C4CA3B2C558294002D2A9B /* Task_Master.xcdatamodeld */,
 				F4C4CA402C558298002D2A9B /* LaunchScreen.storyboard */,
 				F4C4CA382C558294002D2A9B /* Main.storyboard */,
 				F4C4CA7B2C579B0D002D2A9B /* LaunchScreenAnimation */,
@@ -144,7 +145,6 @@
 			isa = PBXGroup;
 			children = (
 				F4C4CA3E2C558298002D2A9B /* Assets.xcassets */,
-				F4C4CA3B2C558294002D2A9B /* Task_Master.xcdatamodeld */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -673,7 +673,8 @@
 				F4C4CA3C2C558294002D2A9B /* Task_Master.xcdatamodel */,
 			);
 			currentVersion = F4C4CA3C2C558294002D2A9B /* Task_Master.xcdatamodel */;
-			path = Task_Master.xcdatamodeld;
+			name = Task_Master.xcdatamodeld;
+			path = Resources/Task_Master.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
