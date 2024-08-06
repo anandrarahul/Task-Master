@@ -16,8 +16,8 @@ class TaskListViewController: UIViewController {
 
     @IBOutlet weak var taskListTableView: UITableView!
     
-    var toDoTaskDetailsList =  [TaskDetails]()
-    var doneTaskDetailsList =  [TaskDetails]()
+    var toDoTaskDetailsList =  [TaskRecord]()
+    var doneTaskDetailsList =  [TaskRecord]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,9 +30,31 @@ class TaskListViewController: UIViewController {
         self.taskListTableView.register(taskCellNib, forCellReuseIdentifier: "TaskTableViewCell")
     }
     
+    private func clearRecordsBeforeFetch() {
+        self.toDoTaskDetailsList.removeAll()
+        self.doneTaskDetailsList.removeAll()
+    }
+    
+    private func fetchAndReloadRecords() {
+        let allTasks = TaskMasterCoreDataManager.shared.fetchAllTasks()
+        for task in allTasks {
+            if task.taskStatus == "To Do" {
+                self.toDoTaskDetailsList.append(task)
+            } else if task.taskStatus == "Done" {
+                self.doneTaskDetailsList.append(task)
+            }
+        }
+        self.taskListTableView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.clearRecordsBeforeFetch()
+        self.fetchAndReloadRecords()
+    }
+    
     @objc func addButtonTapped() {
         let addTaskViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddTaskViewController") as! AddTaskViewController
-        addTaskViewController.delegate = self
         self.navigationController?.pushViewController(addTaskViewController, animated: true)
     }
 }
@@ -98,9 +120,9 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
         
         switch taskSection {
         case .toDo:
-            taskCell.setTaskDetails(taskDetails: self.toDoTaskDetailsList[indexPath.row], taskStatus: .toDo)
+            taskCell.setTaskDetails(taskDetails: self.toDoTaskDetailsList[indexPath.row])
         case .done:
-            taskCell.setTaskDetails(taskDetails: self.doneTaskDetailsList[indexPath.row], taskStatus: .done)
+            taskCell.setTaskDetails(taskDetails: self.doneTaskDetailsList[indexPath.row])
         }
         return taskCell
     }
@@ -115,24 +137,10 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension TaskListViewController: SaveDetailsDelegate {
-    func saveDetails(taskDetail: TaskDetails) {
-        self.toDoTaskDetailsList.append(taskDetail)
-        self.taskListTableView.reloadData()
-    }
     
-    func updateTaskDetails(taskDetail: TaskDetails, taskStatus: TaskListStatus) {
-        if taskStatus == .toDo {
-            if let currentIndex = self.doneTaskDetailsList.firstIndex(where: { $0.taskTitle == taskDetail.taskTitle && $0.taskDescription == taskDetail.taskDescription }) {
-                self.doneTaskDetailsList.remove(at: currentIndex)
-                self.toDoTaskDetailsList.append(taskDetail)
-            }
-        } else {
-            if let currentIndex = self.toDoTaskDetailsList.firstIndex(where: { $0.taskTitle == taskDetail.taskTitle && $0.taskDescription == taskDetail.taskDescription }) {
-                self.toDoTaskDetailsList.remove(at: currentIndex)
-                self.doneTaskDetailsList.append(taskDetail)
-            }
-        }
-        self.taskListTableView.reloadData()
+    func updateTaskDetails() {
+        self.clearRecordsBeforeFetch()
+        self.fetchAndReloadRecords()
     }
 }
 

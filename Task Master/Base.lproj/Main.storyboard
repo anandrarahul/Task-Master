@@ -73,13 +73,13 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="endlessRoad" translatesAutoresizingMaskIntoConstraints="NO" id="QmH-ud-a9U">
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                             </imageView>
-                            <textField opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="add title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="maA-S6-xs5">
-                                <rect key="frame" x="20" y="159" width="353" height="34"/>
+                            <textField opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="maA-S6-xs5">
+                                <rect key="frame" x="20" y="109" width="353" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" keyboardType="namePhonePad"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WAg-rK-iMo">
-                                <rect key="frame" x="20" y="213" width="353" height="470"/>
+                                <rect key="frame" x="20" y="163" width="353" height="496"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -113,33 +113,42 @@
                                     <action selector="saveButtonTapped:" destination="tKH-be-gdg" eventType="touchUpInside" id="9G4-b5-bNQ"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" placeholder="Deadline" minimumFontSize="21" translatesAutoresizingMaskIntoConstraints="NO" id="CUm-EL-zi6">
+                                <rect key="frame" x="20" y="679" width="353" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="0Hh-RW-pUh"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="CUm-EL-zi6" firstAttribute="leading" secondItem="0Hh-RW-pUh" secondAttribute="leading" constant="20" id="4Q0-6u-AfJ"/>
                             <constraint firstItem="0Hh-RW-pUh" firstAttribute="trailing" secondItem="WAg-rK-iMo" secondAttribute="trailing" constant="20" id="6Jx-ab-S6C"/>
+                            <constraint firstItem="CUm-EL-zi6" firstAttribute="top" secondItem="WAg-rK-iMo" secondAttribute="bottom" constant="20" id="AeW-h5-63i"/>
                             <constraint firstItem="0Hh-RW-pUh" firstAttribute="bottom" secondItem="QmH-ud-a9U" secondAttribute="bottom" id="EGm-2G-muO"/>
                             <constraint firstItem="QmH-ud-a9U" firstAttribute="leading" secondItem="0Hh-RW-pUh" secondAttribute="leading" id="IpN-tT-ZI2"/>
-                            <constraint firstItem="maA-S6-xs5" firstAttribute="top" secondItem="0Hh-RW-pUh" secondAttribute="top" constant="100" id="KHb-tE-BIo"/>
-                            <constraint firstItem="gLJ-Gu-9Wr" firstAttribute="top" secondItem="WAg-rK-iMo" secondAttribute="bottom" constant="50" id="Mvy-ns-bOf"/>
+                            <constraint firstItem="maA-S6-xs5" firstAttribute="top" secondItem="0Hh-RW-pUh" secondAttribute="top" constant="50" id="KHb-tE-BIo"/>
+                            <constraint firstItem="gLJ-Gu-9Wr" firstAttribute="top" secondItem="CUm-EL-zi6" secondAttribute="bottom" constant="20" id="M2w-F5-CLg"/>
                             <constraint firstItem="0Hh-RW-pUh" firstAttribute="trailing" secondItem="maA-S6-xs5" secondAttribute="trailing" constant="20" id="Nrq-mJ-AAe"/>
                             <constraint firstItem="maA-S6-xs5" firstAttribute="leading" secondItem="0Hh-RW-pUh" secondAttribute="leading" constant="20" id="PWm-fc-d4p"/>
                             <constraint firstItem="0Hh-RW-pUh" firstAttribute="trailing" secondItem="QmH-ud-a9U" secondAttribute="trailing" id="UVy-2V-1Dk"/>
                             <constraint firstItem="WAg-rK-iMo" firstAttribute="top" secondItem="maA-S6-xs5" secondAttribute="bottom" constant="20" id="VTu-Fq-ZlL"/>
                             <constraint firstItem="WAg-rK-iMo" firstAttribute="leading" secondItem="0Hh-RW-pUh" secondAttribute="leading" constant="20" id="lW8-S4-lNc"/>
+                            <constraint firstItem="0Hh-RW-pUh" firstAttribute="trailing" secondItem="CUm-EL-zi6" secondAttribute="trailing" constant="20" id="v9m-vx-PsV"/>
                             <constraint firstItem="gLJ-Gu-9Wr" firstAttribute="centerX" secondItem="EOw-PC-PKG" secondAttribute="centerX" id="w9a-Rc-QQm"/>
                             <constraint firstItem="0Hh-RW-pUh" firstAttribute="bottom" secondItem="gLJ-Gu-9Wr" secondAttribute="bottom" constant="50" id="wQ6-Di-GzB"/>
                             <constraint firstItem="QmH-ud-a9U" firstAttribute="top" secondItem="0Hh-RW-pUh" secondAttribute="top" id="x6I-bF-0eX"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addDeadlineLabel" destination="CUm-EL-zi6" id="0CS-DO-tVq"/>
                         <outlet property="addDescriptionLabel" destination="WAg-rK-iMo" id="sOl-UG-PqG"/>
                         <outlet property="addTitleLabel" destination="maA-S6-xs5" id="7Ih-Tn-JTv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2XQ-Jm-eUC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="146" y="659"/>
+            <point key="canvasLocation" x="145.80152671755724" y="658.45070422535218"/>
         </scene>
         <!--Details View Controller-->
         <scene sceneID="dq6-m4-NSG">
