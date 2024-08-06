@@ -28,11 +28,11 @@ class AddTaskViewController: UIViewController {
     }
     
     private func setupDatePicker() {
-        datePicker = UIDatePicker()
-        datePicker?.datePickerMode = .date
-        datePicker?.preferredDatePickerStyle = .inline
-        datePicker?.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
-        self.addDeadlineLabel.inputView = datePicker
+        self.datePicker = UIDatePicker()
+        self.datePicker?.datePickerMode = .date
+        self.datePicker?.preferredDatePickerStyle = .inline
+        self.datePicker?.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
+        self.addDeadlineLabel.inputView = self.datePicker
         
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
@@ -53,7 +53,7 @@ class AddTaskViewController: UIViewController {
     }
     
     @objc private func dismissKeyboard() {
-        view.endEditing(true)
+        self.view.endEditing(true)
     }
     
     override func viewDidLoad() {

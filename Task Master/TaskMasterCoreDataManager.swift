@@ -39,16 +39,16 @@ class TaskMasterCoreDataManager {
     // MARK: - CRUD Operations
     
     func createTask(title: String, description: String?, status: String, deadline: String?) {
-        let taskRecord = TaskRecord(context: context)
-        taskRecord.taskTitle = title
-        taskRecord.taskDescription = description
-        taskRecord.taskStatus = status
-        taskRecord.taskDeadline = deadline
+        let taskDetails = TaskDetails(context: context)
+        taskDetails.taskTitle = title
+        taskDetails.taskDescription = description
+        taskDetails.taskStatus = status
+        taskDetails.taskDeadline = deadline
         saveContext()
     }
     
-    func fetchAllTasks() -> [TaskRecord] {
-        let fetchRequest: NSFetchRequest<TaskRecord> = TaskRecord.fetchRequest()
+    func fetchAllTasks() -> [TaskDetails] {
+        let fetchRequest: NSFetchRequest<TaskDetails> = TaskDetails.fetchRequest()
         do {
             return try context.fetch(fetchRequest)
         } catch {
@@ -57,22 +57,22 @@ class TaskMasterCoreDataManager {
         }
     }
     
-    func updateTask(taskRecord: TaskRecord, title: String?, description: String?, status: String, deadline: String?) {
+    func updateTask(taskDetails: TaskDetails, title: String?, description: String?, status: String, deadline: String?) {
         if let title = title {
-            taskRecord.taskTitle = title
+            taskDetails.taskTitle = title
         }
         if let description = description {
-            taskRecord.taskDescription = description
+            taskDetails.taskDescription = description
         }
-        taskRecord.taskStatus = status
+        taskDetails.taskStatus = status
         if let deadline = deadline {
-            taskRecord.taskDeadline = deadline
+            taskDetails.taskDeadline = deadline
         }
         saveContext()
     }
     
-    func deleteTask(taskRecord: TaskRecord) {
-        context.delete(taskRecord)
+    func deleteTask(taskDetails: TaskDetails) {
+        context.delete(taskDetails)
         saveContext()
     }
 }

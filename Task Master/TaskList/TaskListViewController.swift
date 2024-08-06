@@ -16,8 +16,8 @@ class TaskListViewController: UIViewController {
 
     @IBOutlet weak var taskListTableView: UITableView!
     
-    var toDoTaskDetailsList =  [TaskRecord]()
-    var doneTaskDetailsList =  [TaskRecord]()
+    var toDoTaskDetailsList =  [TaskDetails]()
+    var doneTaskDetailsList =  [TaskDetails]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
