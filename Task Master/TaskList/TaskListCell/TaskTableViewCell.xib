@@ -48,6 +48,12 @@
                             <action selector="selectionButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="PXk-te-iB2"/>
                         </connections>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="deadLine" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ew8-Gm-Lhl">
+                        <rect key="frame" x="368" y="94" width="60" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="BYm-hX-PQK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="BL8-ZZ-R62"/>
@@ -57,13 +63,16 @@
                     <constraint firstItem="K8q-WM-Y4V" firstAttribute="leading" secondItem="BYm-hX-PQK" secondAttribute="trailing" constant="20" id="T7I-Kh-PUE"/>
                     <constraint firstItem="XsI-eu-dQm" firstAttribute="top" secondItem="BYm-hX-PQK" secondAttribute="bottom" constant="20" id="Vz7-N7-G12"/>
                     <constraint firstItem="K8q-WM-Y4V" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="bRt-S7-y3u"/>
+                    <constraint firstAttribute="trailing" secondItem="ew8-Gm-Lhl" secondAttribute="trailing" constant="20" id="d8m-LW-wAp"/>
                     <constraint firstItem="BYm-hX-PQK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="dwY-gG-wnq"/>
+                    <constraint firstAttribute="bottom" secondItem="ew8-Gm-Lhl" secondAttribute="bottom" constant="15" id="gCd-fg-7Pp"/>
                     <constraint firstItem="K8q-WM-Y4V" firstAttribute="leading" secondItem="XsI-eu-dQm" secondAttribute="trailing" constant="20" id="oNH-Pe-yR3"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="selectionStatusButton" destination="K8q-WM-Y4V" id="kbA-8R-55g"/>
+                <outlet property="taskDeadline" destination="ew8-Gm-Lhl" id="eyE-Ks-JsF"/>
                 <outlet property="taskDescription" destination="XsI-eu-dQm" id="AVk-fk-qo1"/>
                 <outlet property="taskTitle" destination="BYm-hX-PQK" id="sJe-RP-5gp"/>
             </connections>
@@ -72,6 +81,9 @@
     </objects>
     <resources>
         <image name="unselected" width="24" height="22"/>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
