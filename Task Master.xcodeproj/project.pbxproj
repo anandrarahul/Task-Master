@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F41762CA2C61346C00C7E262 /* TaskMasterCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41762C92C61346C00C7E262 /* TaskMasterCoreDataManager.swift */; };
+		F41762D22C62B50B00C7E262 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41762D12C62B50B00C7E262 /* LocalNotificationManager.swift */; };
 		F4C4CA332C558294002D2A9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C4CA322C558294002D2A9B /* AppDelegate.swift */; };
 		F4C4CA352C558294002D2A9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C4CA342C558294002D2A9B /* SceneDelegate.swift */; };
 		F4C4CA372C558294002D2A9B /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C4CA362C558294002D2A9B /* TaskListViewController.swift */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		F41762C92C61346C00C7E262 /* TaskMasterCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskMasterCoreDataManager.swift; sourceTree = "<group>"; };
+		F41762D12C62B50B00C7E262 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		F4C4CA2F2C558294002D2A9B /* Task Master.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Task Master.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4C4CA322C558294002D2A9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4C4CA342C558294002D2A9B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				F4C4CA782C57997A002D2A9B /* Resources */,
 				F4C4CA432C558298002D2A9B /* Info.plist */,
 				F41762C92C61346C00C7E262 /* TaskMasterCoreDataManager.swift */,
+				F41762D12C62B50B00C7E262 /* LocalNotificationManager.swift */,
 			);
 			path = "Task Master";
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				F4C4CA3D2C558294002D2A9B /* Task_Master.xcdatamodeld in Sources */,
 				F4C4CA352C558294002D2A9B /* SceneDelegate.swift in Sources */,
 				F4C4CA772C577E72002D2A9B /* DetailsViewController.swift in Sources */,
+				F41762D22C62B50B00C7E262 /* LocalNotificationManager.swift in Sources */,
 				F41762CA2C61346C00C7E262 /* TaskMasterCoreDataManager.swift in Sources */,
 				F4C4CB142C5971AE002D2A9B /* AddTaskViewController.swift in Sources */,
 			);
