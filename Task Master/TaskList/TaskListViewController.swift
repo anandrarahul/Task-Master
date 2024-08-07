@@ -10,6 +10,7 @@ import UIKit
 enum TaskListStatus: String, CaseIterable {
     case toDo = "To Do"
     case done = "Done"
+    case deadlineMissed = "Deadline Missed"
 }
 
 class TaskListViewController: UIViewController {
@@ -18,6 +19,7 @@ class TaskListViewController: UIViewController {
     
     var toDoTaskDetailsList =  [TaskDetails]()
     var doneTaskDetailsList =  [TaskDetails]()
+    var deadlineMissedTaskDetailsList =  [TaskDetails]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,12 +35,27 @@ class TaskListViewController: UIViewController {
     private func clearRecordsBeforeFetch() {
         self.toDoTaskDetailsList.removeAll()
         self.doneTaskDetailsList.removeAll()
+        self.deadlineMissedTaskDetailsList.removeAll()
+    }
+    
+    func timeIntervalBetweenCurrentDateAnd(dateString: String, dateFormat: String = "dd-MM-yyyy") -> TimeInterval? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        guard let targetDate = dateFormatter.date(from: dateString) else {
+            print("Invalid date format or date string")
+            return nil
+        }
+        let currentDate = Date()
+        let timeInterval = targetDate.timeIntervalSince(currentDate)
+        return timeInterval
     }
     
     private func fetchAndReloadRecords() {
         let allTasks = TaskMasterCoreDataManager.shared.fetchAllTasks()
         for task in allTasks {
-            if task.taskStatus == "To Do" {
+            if let timeInterval = self.timeIntervalBetweenCurrentDateAnd(dateString: task.taskDeadline!), timeInterval < 0 {
+                self.deadlineMissedTaskDetailsList.append(task)
+            } else if task.taskStatus == "To Do" {
                 self.toDoTaskDetailsList.append(task)
             } else if task.taskStatus == "Done" {
                 self.doneTaskDetailsList.append(task)
@@ -107,6 +124,8 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
             return self.toDoTaskDetailsList.count
         case .done:
             return self.doneTaskDetailsList.count
+        case .deadlineMissed:
+            return self.deadlineMissedTaskDetailsList.count
         }
     }
     
@@ -123,6 +142,8 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
             taskCell.setTaskDetails(taskDetails: self.toDoTaskDetailsList[indexPath.row])
         case .done:
             taskCell.setTaskDetails(taskDetails: self.doneTaskDetailsList[indexPath.row])
+        case .deadlineMissed:
+            taskCell.setTaskDetails(taskDetails: self.deadlineMissedTaskDetailsList[indexPath.row])
         }
         return taskCell
     }
