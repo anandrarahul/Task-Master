@@ -18,6 +18,7 @@ class AddTaskViewController: UIViewController {
     @IBAction func saveButtonTapped(_ sender: UIButton) {
         if let title = self.addTitleLabel.text, title != "" {
             TaskMasterCoreDataManager.shared.createTask(title: title, description: self.addDescriptionLabel.text, status: "To Do", deadline: self.addDeadlineLabel.text)
+            self.scheduleAlocalNotification()
             self.navigationController?.popViewController(animated: true)
         } else {
             let emptyTitleAlert = UIAlertController(title: "Title Empty!", message: "Please Enter a valid title.", preferredStyle: .alert)
@@ -64,6 +65,28 @@ class AddTaskViewController: UIViewController {
         self.setupDatePicker()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    func scheduleAlocalNotification() {
+        if let deadline = self.addDeadlineLabel.text, deadline != "" {
+            if let timeInterval = self.timeIntervalBetweenCurrentDateAnd(dateString: deadline), timeInterval > 0 {
+                let bufferTime: Double = 60 * 60 * 14; //60 seconds * 60 minutes * 14 for 14 hours. So, that the notification will be send at 10 am one day before.
+                LocalNotificationManager.shared.scheduleNotification(title: self.addTitleLabel.text!, body: self.addDescriptionLabel.text!, timeInterval: timeInterval - bufferTime)
+                print(timeInterval)
+            }
+        }
+    }
+    
+    func timeIntervalBetweenCurrentDateAnd(dateString: String, dateFormat: String = "dd-MM-yyyy") -> TimeInterval? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        guard let targetDate = dateFormatter.date(from: dateString) else {
+            print("Invalid date format or date string")
+            return nil
+        }
+        let currentDate = Date()
+        let timeInterval = targetDate.timeIntervalSince(currentDate)
+        return timeInterval
     }
 
 }

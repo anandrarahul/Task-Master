@@ -42,26 +42,6 @@ class TaskTableViewCell: UITableViewCell {
             self.selectionStatusButton.isSelected = false
         }
         self.taskDetails = taskDetails
-        if let deadline = self.taskDeadline.text, deadline != "" {
-            if let timeInterval = self.timeIntervalBetweenCurrentDateAnd(dateString: deadline), timeInterval > 0 {
-                let bufferTime: Double = 60 * 60 * 14; //60 seconds * 60 minutes * 14 for 14 hours. So, that the notification will be send at 10 am one day before.
-                LocalNotificationManager.shared.scheduleNotification(title: self.taskTitle.text!, body: self.taskDescription.text!, timeInterval: timeInterval - bufferTime)
-//                LocalNotificationManager.shared.scheduleNotification(title: self.taskTitle.text!, body: self.taskDescription.text!, timeInterval: timeInterval - 43350)
-//                print(timeInterval - 43350)
-            }
-        }
-    }
-    
-    func timeIntervalBetweenCurrentDateAnd(dateString: String, dateFormat: String = "dd-MM-yyyy") -> TimeInterval? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = dateFormat
-        guard let targetDate = dateFormatter.date(from: dateString) else {
-            print("Invalid date format or date string")
-            return nil
-        }
-        let currentDate = Date()
-        let timeInterval = targetDate.timeIntervalSince(currentDate)
-        return timeInterval
     }
     
 }
