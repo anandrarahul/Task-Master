@@ -28,23 +28,20 @@ class AddAndEditTaskViewController: UIViewController {
     var editTaskViewControllerDataSource: EditTaskViewControllerDataSource?
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
-        if let taskToEdit = self.editTaskViewControllerDataSource, let task = taskToEdit.taskDetails {
-            if let title = self.addTitleLabel.text, title != "" {
-                TaskMasterCoreDataManager.shared.updateTask(taskDetails: task, title: title, description: self.addDescriptionLabel.text, status: taskToEdit.taskDetails!.taskStatus!, deadline: self.addDeadlineLabel.text)
-                self.scheduleAlocalNotification()
-                self.navigationController?.popViewController(animated: true)
-            } else {
-                self.presentAlertForInvalidTitle()
-            }
-        } else {
-            if let title = self.addTitleLabel.text, title != "" {
-                TaskMasterCoreDataManager.shared.createTask(title: title, description: self.addDescriptionLabel.text, status: "To Do", deadline: self.addDeadlineLabel.text)
-                self.scheduleAlocalNotification()
-                self.navigationController?.popViewController(animated: true)
-            } else {
-                self.presentAlertForInvalidTitle()
-            }
+        guard let title = self.addTitleLabel.text, !title.isEmpty else {
+            self.presentAlertForInvalidTitle()
+            return
         }
+        let description = self.addDescriptionLabel.text
+        let deadline = self.addDeadlineLabel.text
+        
+        if let taskToEdit = self.editTaskViewControllerDataSource, let task = taskToEdit.taskDetails {
+            TaskMasterCoreDataManager.shared.updateTask(taskDetails: task, title: title, description: description, status: task.taskStatus ?? "To Do", deadline: deadline)
+        } else {
+            TaskMasterCoreDataManager.shared.createTask(title: title, description: description, status: "To Do", deadline: deadline)
+        }
+        self.scheduleAlocalNotification()
+        self.navigationController?.popViewController(animated: true)
     }
     
     func presentAlertForInvalidTitle() {
