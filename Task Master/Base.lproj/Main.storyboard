@@ -62,10 +62,10 @@
             </objects>
             <point key="canvasLocation" x="146" y="-2"/>
         </scene>
-        <!--Add Task View Controller-->
+        <!--Add And Edit Task View Controller-->
         <scene sceneID="8g2-xY-13L">
             <objects>
-                <viewController storyboardIdentifier="AddTaskViewController" id="tKH-be-gdg" customClass="AddTaskViewController" customModule="Task_Master" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddTaskViewController" id="tKH-be-gdg" customClass="AddAndEditTaskViewController" customModule="Task_Master" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EOw-PC-PKG">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

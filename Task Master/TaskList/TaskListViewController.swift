@@ -71,7 +71,8 @@ class TaskListViewController: UIViewController {
     }
     
     @objc func addButtonTapped() {
-        let addTaskViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddTaskViewController") as! AddTaskViewController
+        let addTaskViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddTaskViewController") as! AddAndEditTaskViewController
+        addTaskViewController.setNavigationItemsTitle(navigationTitle: "Add Tasks")
         self.navigationController?.pushViewController(addTaskViewController, animated: true)
     }
 }
@@ -149,10 +150,18 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        let detailsViewControllerDataSource = DetailsViewControllerDataSource(taskTitle: taskTitleList[indexPath.row], taskDescription: taskDescriptionList[indexPath.row])
-        //        let detailsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
-        //        detailsViewController.detailsViewControllerDataSource = detailsViewControllerDataSource
-        //        self.navigationController?.pushViewController(detailsViewController, animated: true)
+        let editTaskViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddTaskViewController") as! AddAndEditTaskViewController
+        let task: TaskDetails
+        if indexPath.section == 0 {
+            task = self.toDoTaskDetailsList[indexPath.row]
+        } else if indexPath.section == 1 {
+            task = self.doneTaskDetailsList[indexPath.row]
+        } else {
+            task = self.deadlineMissedTaskDetailsList[indexPath.row]
+        }
+        let editTaskViewControllerDataSource = EditTaskViewControllerDataSource(taskDetails: task, navigationTitle: "Edit Task")
+        editTaskViewController.editTaskViewControllerDataSource = editTaskViewControllerDataSource
+        self.navigationController?.pushViewController(editTaskViewController, animated: true)
     }
     
 }
