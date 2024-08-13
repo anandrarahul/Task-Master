@@ -103,7 +103,6 @@ class AddAndEditTaskViewController: UIViewController {
         super.viewDidLoad()
         
         self.addTitleLabel.delegate = self
-        self.addDescriptionLabel.delegate = self
         self.setupDatePicker()
         self.setTaskDetailsAndNavigationTitle()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
@@ -134,7 +133,7 @@ class AddAndEditTaskViewController: UIViewController {
 
 }
 
-extension AddAndEditTaskViewController: UITextFieldDelegate, UITextViewDelegate {
+extension AddAndEditTaskViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == self.addTitleLabel {
