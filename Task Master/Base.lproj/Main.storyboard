@@ -150,76 +150,9 @@
             </objects>
             <point key="canvasLocation" x="145.80152671755724" y="658.45070422535218"/>
         </scene>
-        <!--Details View Controller-->
-        <scene sceneID="dq6-m4-NSG">
-            <objects>
-                <viewController storyboardIdentifier="DetailsViewController" id="SWW-gS-BXw" customClass="DetailsViewController" customModule="Task_Master" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="HpL-FO-DSh">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6r5-L9-zPE">
-                                <rect key="frame" x="20" y="315.66666666666669" width="353" height="20.333333333333314"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4dI-aM-msn">
-                                <rect key="frame" x="66.666666666666671" y="436" width="80.000000000000014" height="80"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="J50-ZF-1Th"/>
-                                    <constraint firstAttribute="width" constant="80" id="Vfk-Ac-z4d"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="hand.thumbsup.circle" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="70"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="yesButtonTapped:" destination="SWW-gS-BXw" eventType="touchUpInside" id="Ym2-Os-iwr"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OWH-hm-3CK">
-                                <rect key="frame" x="246.66666666666663" y="436" width="80" height="80"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="QJZ-T3-oXV"/>
-                                    <constraint firstAttribute="width" constant="80" id="aRA-nf-hRc"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="hand.thumbsdown.circle" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="70"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="noButtonTapped:" destination="SWW-gS-BXw" eventType="touchUpInside" id="7bN-sA-JwY"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="6Hp-hI-4OK"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="6r5-L9-zPE" firstAttribute="bottom" secondItem="4dI-aM-msn" secondAttribute="top" constant="-100" id="7MT-go-4WX"/>
-                            <constraint firstItem="6Hp-hI-4OK" firstAttribute="trailing" secondItem="6r5-L9-zPE" secondAttribute="trailing" constant="20" id="Ef5-RI-Xtp"/>
-                            <constraint firstItem="6r5-L9-zPE" firstAttribute="leading" secondItem="6Hp-hI-4OK" secondAttribute="leading" constant="20" id="Mjg-Gc-CAb"/>
-                            <constraint firstItem="OWH-hm-3CK" firstAttribute="leading" secondItem="4dI-aM-msn" secondAttribute="trailing" constant="100" id="PBO-Ja-wNs"/>
-                            <constraint firstItem="4dI-aM-msn" firstAttribute="centerY" secondItem="HpL-FO-DSh" secondAttribute="centerY" constant="50" id="Tuf-01-5Ui"/>
-                            <constraint firstItem="OWH-hm-3CK" firstAttribute="centerY" secondItem="4dI-aM-msn" secondAttribute="centerY" id="Z94-mi-9Ks"/>
-                            <constraint firstItem="4dI-aM-msn" firstAttribute="trailing" secondItem="HpL-FO-DSh" secondAttribute="centerX" constant="-50" id="f2u-Km-8ei"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="noButtonOutlet" destination="OWH-hm-3CK" id="ofQ-Fn-2tL"/>
-                        <outlet property="taskDescription" destination="6r5-L9-zPE" id="6DK-GW-YS5"/>
-                        <outlet property="yesButtonOutlet" destination="4dI-aM-msn" id="efU-Ai-22M"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6kN-bw-ap5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="866" y="-2"/>
-        </scene>
     </scenes>
     <resources>
         <image name="endlessRoad" width="1024" height="772"/>
-        <image name="hand.thumbsdown.circle" catalog="system" width="128" height="123"/>
-        <image name="hand.thumbsup.circle" catalog="system" width="128" height="123"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
