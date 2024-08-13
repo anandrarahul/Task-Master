@@ -142,11 +142,4 @@ extension AddAndEditTaskViewController: UITextFieldDelegate, UITextViewDelegate 
         }
         return true
     }
-    
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if text == "\n", textView == self.addDescriptionLabel {
-            textView.resignFirstResponder()
-        }
-        return true
-    }
 }

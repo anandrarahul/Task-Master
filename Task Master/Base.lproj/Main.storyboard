@@ -76,14 +76,14 @@
                             <textField opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="maA-S6-xs5">
                                 <rect key="frame" x="20" y="109" width="353" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" keyboardType="namePhonePad"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WAg-rK-iMo">
                                 <rect key="frame" x="20" y="163" width="353" height="496"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" keyboardType="namePhonePad"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <integer key="value" value="4"/>
@@ -113,7 +113,7 @@
                                     <action selector="saveButtonTapped:" destination="tKH-be-gdg" eventType="touchUpInside" id="9G4-b5-bNQ"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" placeholder="Deadline" minimumFontSize="21" translatesAutoresizingMaskIntoConstraints="NO" id="CUm-EL-zi6">
+                            <textField opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" placeholder="Deadline" minimumFontSize="21" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="CUm-EL-zi6">
                                 <rect key="frame" x="20" y="679" width="353" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
