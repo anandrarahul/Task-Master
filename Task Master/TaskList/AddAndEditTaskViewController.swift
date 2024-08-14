@@ -40,7 +40,7 @@ class AddAndEditTaskViewController: UIViewController {
         } else {
             TaskMasterCoreDataManager.shared.createTask(title: title, description: description, status: "To Do", deadline: deadline)
         }
-        self.scheduleAlocalNotification()
+        self.scheduleALocalNotification()
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -109,10 +109,10 @@ class AddAndEditTaskViewController: UIViewController {
         self.view.addGestureRecognizer(tapGesture)
     }
     
-    func scheduleAlocalNotification() {
+    func scheduleALocalNotification() {
         if let deadline = self.addDeadlineLabel.text, deadline != "" {
-            if let timeInterval = self.timeIntervalBetweenCurrentDateAnd(dateString: deadline), timeInterval > 0 {
-                let bufferTime: Double = 60 * 60 * 14; //60 seconds * 60 minutes * 14 for 14 hours. So, that the notification will be send at 10 am one day before.
+            let bufferTime: Double = 60 * 60 * 14; //60 seconds * 60 minutes * 14 for 14 hours. So, that the notification will be send at 10 am one day before.
+            if let timeInterval = self.timeIntervalBetweenCurrentDateAnd(dateString: deadline), timeInterval > bufferTime {
                 LocalNotificationManager.shared.scheduleNotification(title: self.addTitleLabel.text!, body: self.addDescriptionLabel.text!, timeInterval: timeInterval - bufferTime)
                 print(timeInterval)
             }
