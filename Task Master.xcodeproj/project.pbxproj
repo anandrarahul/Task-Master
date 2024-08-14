@@ -90,6 +90,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F41762DD2C6B748E00C7E262 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				F41762C92C61346C00C7E262 /* TaskMasterCoreDataManager.swift */,
+				F41762D12C62B50B00C7E262 /* LocalNotificationManager.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		F4C4CA262C558293002D2A9B = {
 			isa = PBXGroup;
 			children = (
@@ -122,8 +131,7 @@
 				F4C4CA792C5799E6002D2A9B /* TaskList */,
 				F4C4CA782C57997A002D2A9B /* Resources */,
 				F4C4CA432C558298002D2A9B /* Info.plist */,
-				F41762C92C61346C00C7E262 /* TaskMasterCoreDataManager.swift */,
-				F41762D12C62B50B00C7E262 /* LocalNotificationManager.swift */,
+				F41762DD2C6B748E00C7E262 /* Common */,
 			);
 			path = "Task Master";
 			sourceTree = "<group>";
