@@ -164,6 +164,30 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
         self.navigationController?.pushViewController(editTaskViewController, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+        
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            if let taskSection = TaskListStatus.allCases[safe: indexPath.section] {
+                let taskToDelete: TaskDetails
+                switch taskSection {
+                case .toDo:
+                    taskToDelete = self.toDoTaskDetailsList[indexPath.row]
+                    self.toDoTaskDetailsList.remove(at: indexPath.row)
+                case .done:
+                    taskToDelete = self.doneTaskDetailsList[indexPath.row]
+                    self.doneTaskDetailsList.remove(at: indexPath.row)
+                case .deadlineMissed:
+                    taskToDelete = self.deadlineMissedTaskDetailsList[indexPath.row]
+                    self.deadlineMissedTaskDetailsList.remove(at: indexPath.row)
+                }
+                TaskMasterCoreDataManager.shared.deleteTask(taskDetails: taskToDelete)
+            }
+        }
+        self.taskListTableView.deleteRows(at: [indexPath], with: .automatic)
+    }
 }
 
 extension TaskListViewController: SaveDetailsDelegate {
