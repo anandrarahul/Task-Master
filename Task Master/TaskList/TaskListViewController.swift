@@ -20,11 +20,13 @@ class TaskListViewController: UIViewController {
     var toDoTaskDetailsList =  [TaskDetails]()
     var doneTaskDetailsList =  [TaskDetails]()
     var deadlineMissedTaskDetailsList =  [TaskDetails]()
+    var canEditRow: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Tasks"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .done, target: self, action: #selector(self.addButtonTapped))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(self.editButtonTapped))
         self.taskListTableView.layer.opacity = 0.85
         self.taskListTableView.dataSource = self
         self.taskListTableView.delegate = self
@@ -74,6 +76,17 @@ class TaskListViewController: UIViewController {
         let addTaskViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddTaskViewController") as! AddAndEditTaskViewController
         addTaskViewController.setNavigationItemsTitle(navigationTitle: "Add Tasks")
         self.navigationController?.pushViewController(addTaskViewController, animated: true)
+    }
+    
+    @objc func editButtonTapped() {
+        self.canEditRow = !self.canEditRow
+        self.navigationItem.leftBarButtonItem?.title = self.canEditRow ? "Done":"Edit"
+        if !self.canEditRow {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .done, target: self, action: #selector(self.addButtonTapped))
+            self.taskListTableView.reloadData()
+        } else {
+            self.navigationItem.rightBarButtonItem = nil
+        }
     }
 }
 
@@ -150,22 +163,24 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let editTaskViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddTaskViewController") as! AddAndEditTaskViewController
-        let task: TaskDetails
-        if indexPath.section == 0 {
-            task = self.toDoTaskDetailsList[indexPath.row]
-        } else if indexPath.section == 1 {
-            task = self.doneTaskDetailsList[indexPath.row]
-        } else {
-            task = self.deadlineMissedTaskDetailsList[indexPath.row]
+        if !self.canEditRow {
+            let editTaskViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddTaskViewController") as! AddAndEditTaskViewController
+            let task: TaskDetails
+            if indexPath.section == 0 {
+                task = self.toDoTaskDetailsList[indexPath.row]
+            } else if indexPath.section == 1 {
+                task = self.doneTaskDetailsList[indexPath.row]
+            } else {
+                task = self.deadlineMissedTaskDetailsList[indexPath.row]
+            }
+            let editTaskViewControllerDataSource = EditTaskViewControllerDataSource(taskDetails: task, navigationTitle: "Edit Task")
+            editTaskViewController.editTaskViewControllerDataSource = editTaskViewControllerDataSource
+            self.navigationController?.pushViewController(editTaskViewController, animated: true)
         }
-        let editTaskViewControllerDataSource = EditTaskViewControllerDataSource(taskDetails: task, navigationTitle: "Edit Task")
-        editTaskViewController.editTaskViewControllerDataSource = editTaskViewControllerDataSource
-        self.navigationController?.pushViewController(editTaskViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        return self.canEditRow
     }
         
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
