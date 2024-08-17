@@ -30,7 +30,7 @@ class LocalNotificationManager: NSObject, UNUserNotificationCenterDelegate {
     }
     
     // Schedule a notification
-    func scheduleNotification(title: String, body: String, timeInterval: TimeInterval, identifier: String = UUID().uuidString) {
+    func scheduleNotification(title: String, body: String, timeInterval: TimeInterval, identifier: String) {
         let content = UNMutableNotificationContent()
         content.title = title
         content.body = body
