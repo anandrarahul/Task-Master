@@ -8,6 +8,7 @@
 import UIKit
 
 enum TaskListStatus: String, CaseIterable {
+    case recommended = "Recommended"
     case toDo = "To Do"
     case done = "Done"
     case deadlineMissed = "Deadline Missed"
@@ -16,10 +17,13 @@ enum TaskListStatus: String, CaseIterable {
 class TaskListViewController: UIViewController {
 
     @IBOutlet weak var taskListTableView: UITableView!
+    @IBOutlet weak var taskSearchBar: UISearchBar!
     
+    private var searchDebouncer: SearchDebouncer!
     var toDoTaskDetailsList =  [TaskDetails]()
     var doneTaskDetailsList =  [TaskDetails]()
     var deadlineMissedTaskDetailsList =  [TaskDetails]()
+    var recommendedTaskDetailsList =  [TaskDetails]()
     var canEditRow: Bool = true
     
     override func viewDidLoad() {
@@ -29,6 +33,10 @@ class TaskListViewController: UIViewController {
         self.taskListTableView.layer.opacity = 0.85
         self.taskListTableView.dataSource = self
         self.taskListTableView.delegate = self
+        self.taskSearchBar.delegate = self
+        self.searchDebouncer = SearchDebouncer(delay: 0.5)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        self.view.addGestureRecognizer(tapGesture)
         let taskCellNib = UINib(nibName: "TaskTableViewCell", bundle: nil)
         self.taskListTableView.register(taskCellNib, forCellReuseIdentifier: "TaskTableViewCell")
     }
@@ -37,6 +45,7 @@ class TaskListViewController: UIViewController {
         self.toDoTaskDetailsList.removeAll()
         self.doneTaskDetailsList.removeAll()
         self.deadlineMissedTaskDetailsList.removeAll()
+        self.recommendedTaskDetailsList.removeAll()
     }
     
     func timeIntervalBetweenCurrentDateAnd(dateString: String, dateFormat: String = "dd-MM-yyyy") -> TimeInterval? {
@@ -62,6 +71,7 @@ class TaskListViewController: UIViewController {
                 self.toDoTaskDetailsList.append(task)
             }
         }
+        self.recommendedTaskDetailsList.append(contentsOf: allTasks)
         self.taskListTableView.reloadData()
     }
     
@@ -72,9 +82,14 @@ class TaskListViewController: UIViewController {
     }
     
     @objc func addButtonTapped() {
+        self.dismissKeyboard()
         let addTaskViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddTaskViewController") as! AddAndEditTaskViewController
         addTaskViewController.setNavigationItemsTitle(navigationTitle: "Add Tasks")
         self.navigationController?.pushViewController(addTaskViewController, animated: true)
+    }
+    
+    @objc private func dismissKeyboard() {
+        self.view.endEditing(true)
     }
 
 }
@@ -123,6 +138,8 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         switch taskSection {
+        case .recommended:
+                return self.taskSearchBar.searchTextField.text != "" ? self.recommendedTaskDetailsList.count:0
         case .toDo:
             return self.toDoTaskDetailsList.count
         case .done:
@@ -141,6 +158,8 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
         taskCell.delegate = self
         
         switch taskSection {
+        case .recommended:
+            taskCell.setTaskDetails(taskDetails: self.recommendedTaskDetailsList[indexPath.row])
         case .toDo:
             taskCell.setTaskDetails(taskDetails: self.toDoTaskDetailsList[indexPath.row])
         case .done:
@@ -155,8 +174,10 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
         let editTaskViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddTaskViewController") as! AddAndEditTaskViewController
         let task: TaskDetails
         if indexPath.section == 0 {
-            task = self.toDoTaskDetailsList[indexPath.row]
+            task = self.recommendedTaskDetailsList[indexPath.row]
         } else if indexPath.section == 1 {
+            task = self.toDoTaskDetailsList[indexPath.row]
+        } else if indexPath.section == 2 {
             task = self.doneTaskDetailsList[indexPath.row]
         } else {
             task = self.deadlineMissedTaskDetailsList[indexPath.row]
@@ -175,6 +196,9 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
             if let taskSection = TaskListStatus.allCases[safe: indexPath.section] {
                 let taskToDelete: TaskDetails
                 switch taskSection {
+                case .recommended:
+                    taskToDelete = self.recommendedTaskDetailsList[indexPath.row]
+                    self.recommendedTaskDetailsList.remove(at: indexPath.row)
                 case .toDo:
                     taskToDelete = self.toDoTaskDetailsList[indexPath.row]
                     self.toDoTaskDetailsList.remove(at: indexPath.row)
@@ -197,6 +221,19 @@ extension TaskListViewController: SaveDetailsDelegate {
     func updateTaskDetails() {
         self.clearRecordsBeforeFetch()
         self.fetchAndReloadRecords()
+    }
+}
+
+extension TaskListViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchDebouncer.debounce {
+            self.performSearch(query: searchText)
+        }
+    }
+    
+    private func performSearch(query: String) {
+        print("Search************Search")
+        self.taskListTableView.reloadData()
     }
 }
 
