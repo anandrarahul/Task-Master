@@ -34,13 +34,17 @@ class AddAndEditTaskViewController: UIViewController {
         }
         let description = self.addDescriptionLabel.text
         let deadline = self.addDeadlineLabel.text
+        let taskId: String = UUID().uuidString
         
         if let taskToEdit = self.editTaskViewControllerDataSource, let task = taskToEdit.taskDetails {
+            if let taskID = task.taskId {
+                LocalNotificationManager.shared.removeNotification(identifier: taskID)
+            }
             TaskMasterCoreDataManager.shared.updateTask(taskDetails: task, title: title, description: description, status: task.taskStatus ?? "To Do", deadline: deadline)
         } else {
-            TaskMasterCoreDataManager.shared.createTask(title: title, description: description, status: "To Do", deadline: deadline)
+            TaskMasterCoreDataManager.shared.createTask(taskId: taskId, title: title, description: description, status: "To Do", deadline: deadline)
         }
-        self.scheduleALocalNotification()
+        self.scheduleALocalNotification(taskIdentifier: taskId)
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -109,11 +113,11 @@ class AddAndEditTaskViewController: UIViewController {
         self.view.addGestureRecognizer(tapGesture)
     }
     
-    func scheduleALocalNotification() {
+    func scheduleALocalNotification(taskIdentifier: String) {
         if let deadline = self.addDeadlineLabel.text, deadline != "" {
             let bufferTime: Double = 60 * 60 * 14; //60 seconds * 60 minutes * 14 for 14 hours. So, that the notification will be send at 10 am one day before.
             if let timeInterval = self.timeIntervalBetweenCurrentDateAnd(dateString: deadline), timeInterval > bufferTime {
-                LocalNotificationManager.shared.scheduleNotification(title: self.addTitleLabel.text!, body: self.addDescriptionLabel.text!, timeInterval: timeInterval - bufferTime)
+                LocalNotificationManager.shared.scheduleNotification(title: self.addTitleLabel.text!, body: self.addDescriptionLabel.text!, timeInterval: timeInterval - bufferTime, identifier: taskIdentifier)
                 print(timeInterval)
             }
         }

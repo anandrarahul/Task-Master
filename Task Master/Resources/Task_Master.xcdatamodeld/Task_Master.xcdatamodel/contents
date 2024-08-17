@@ -3,6 +3,7 @@
     <entity name="TaskDetails" representedClassName="TaskDetails" syncable="YES" codeGenerationType="class">
         <attribute name="taskDeadline" optional="YES" attributeType="String"/>
         <attribute name="taskDescription" optional="YES" attributeType="String"/>
+        <attribute name="taskId" optional="YES" attributeType="String"/>
         <attribute name="taskStatus" optional="YES" attributeType="String"/>
         <attribute name="taskTitle" optional="YES" attributeType="String"/>
     </entity>

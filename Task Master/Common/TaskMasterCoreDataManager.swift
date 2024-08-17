@@ -38,8 +38,9 @@ class TaskMasterCoreDataManager {
     
     // MARK: - CRUD Operations
     
-    func createTask(title: String, description: String?, status: String, deadline: String?) {
+    func createTask(taskId: String, title: String, description: String?, status: String, deadline: String?) {
         let taskDetails = TaskDetails(context: context)
+        taskDetails.taskId = taskId
         taskDetails.taskTitle = title
         taskDetails.taskDescription = description
         taskDetails.taskStatus = status
