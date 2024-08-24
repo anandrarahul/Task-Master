@@ -70,9 +70,28 @@ class TaskListViewModel {
         }
     }
     
+    private func deleteARecommendedTask(taskTodelete: TaskDetails) {
+        let status = taskTodelete.taskStatus
+        if status == "To Do", let timeInterval = self.timeIntervalBetweenCurrentDateAnd(dateString: taskTodelete.taskDeadline!), timeInterval < 0 {
+            if let rowToDelete = self.deadlineMissedTaskDetailsList.firstIndex(of: taskTodelete) {
+                self.deadlineMissedTaskDetailsList.remove(at: rowToDelete)
+            }
+        }else if status == "To Do" {
+            if let rowToDelete = self.toDoTaskDetailsList.firstIndex(of: taskTodelete) {
+                self.toDoTaskDetailsList.remove(at: rowToDelete)
+            }
+        } else if status == "Done" {
+            if let rowToDelete = self.doneTaskDetailsList.firstIndex(of: taskTodelete) {
+                self.doneTaskDetailsList.remove(at: rowToDelete)
+            }
+        }
+    }
+    
     func deleteATask(for section: TaskListStatus, rowToDelete: Int) {
         switch section {
         case .recommended:
+            let recommendedTaskToDelete = self.recommendedTaskDetailsList[rowToDelete]
+            self.deleteARecommendedTask(taskTodelete: recommendedTaskToDelete)
             self.recommendedTaskDetailsList.remove(at: rowToDelete)
         case .toDo:
             self.toDoTaskDetailsList.remove(at: rowToDelete)

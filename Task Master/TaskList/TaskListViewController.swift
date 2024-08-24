@@ -145,9 +145,9 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
                 taskToDelete = self.viewModel.tasks(for: taskSection)[indexPath.row]
                 self.viewModel.deleteATask(for: taskSection, rowToDelete: indexPath.row)
                 TaskMasterCoreDataManager.shared.deleteTask(taskDetails: taskToDelete)
+                self.taskListTableView.reloadData()
             }
         }
-        self.taskListTableView.deleteRows(at: [indexPath], with: .automatic)
     }
 }
 
