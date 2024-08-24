@@ -35,8 +35,7 @@ class TaskListViewController: UIViewController {
         self.taskListTableView.delegate = self
         self.taskSearchBar.delegate = self
         self.searchDebouncer = SearchDebouncer(delay: 0.5)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        self.view.addGestureRecognizer(tapGesture)
+        self.addDoneButtonToToolBar()
         let taskCellNib = UINib(nibName: "TaskTableViewCell", bundle: nil)
         self.taskListTableView.register(taskCellNib, forCellReuseIdentifier: "TaskTableViewCell")
     }
@@ -46,6 +45,15 @@ class TaskListViewController: UIViewController {
         self.doneTaskDetailsList.removeAll()
         self.deadlineMissedTaskDetailsList.removeAll()
         self.recommendedTaskDetailsList.removeAll()
+    }
+    
+    private func addDoneButtonToToolBar() {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissKeyboard))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        toolbar.setItems([flexibleSpace, doneButton], animated: true)
+        self.taskSearchBar.inputAccessoryView = toolbar
     }
     
     func timeIntervalBetweenCurrentDateAnd(dateString: String, dateFormat: String = "dd-MM-yyyy") -> TimeInterval? {
@@ -71,7 +79,6 @@ class TaskListViewController: UIViewController {
                 self.toDoTaskDetailsList.append(task)
             }
         }
-        self.recommendedTaskDetailsList.append(contentsOf: allTasks)
         self.taskListTableView.reloadData()
     }
     
@@ -139,7 +146,7 @@ extension TaskListViewController: UITableViewDataSource, UITableViewDelegate {
         
         switch taskSection {
         case .recommended:
-                return self.taskSearchBar.searchTextField.text != "" ? self.recommendedTaskDetailsList.count:0
+            return self.recommendedTaskDetailsList.count
         case .toDo:
             return self.toDoTaskDetailsList.count
         case .done:
@@ -232,8 +239,17 @@ extension TaskListViewController: UISearchBarDelegate {
     }
     
     private func performSearch(query: String) {
-        print("Search************Search")
-        self.taskListTableView.reloadData()
+        self.recommendedTaskDetailsList.removeAll()
+        if let searchText = self.taskSearchBar.searchTextField.text {
+            let allTasks = TaskMasterCoreDataManager.shared.fetchAllTasks()
+            let filteredTasks = allTasks.filter { task in
+                let titleContains = task.taskTitle?.localizedCaseInsensitiveContains(searchText) ?? false
+                let descriptionContains = task.taskDescription?.localizedCaseInsensitiveContains(searchText) ?? false
+                return titleContains || descriptionContains
+            }
+            self.recommendedTaskDetailsList.append(contentsOf: filteredTasks)
+            self.taskListTableView.reloadSections(IndexSet(integer: 0), with: .fade)
+        }
     }
 }
 
