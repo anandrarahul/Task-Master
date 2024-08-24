@@ -35,6 +35,7 @@ class TaskListViewController: UIViewController {
         self.addDoneButtonToToolBar()
         let taskCellNib = UINib(nibName: "TaskTableViewCell", bundle: nil)
         self.taskListTableView.register(taskCellNib, forCellReuseIdentifier: "TaskTableViewCell")
+        self.addFooterToTheTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,6 +62,29 @@ class TaskListViewController: UIViewController {
     
     @objc private func dismissKeyboard() {
         self.view.endEditing(true)
+    }
+    
+    private func getAppVersion() -> String {
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
+           let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
+            print("Version \(version) (\(build))")
+            return "Version: \(version)"
+        }
+        return "Version: 00.00.0"
+    }
+    
+    private func addFooterToTheTableView() {
+        let footerView = UIView()
+        footerView.backgroundColor = .systemBackground
+        footerView.frame = CGRect(x: 0, y: 0, width: self.taskListTableView.frame.width, height: 50)
+        let footerLabel = UILabel()
+        footerLabel.text = self.getAppVersion()
+        footerLabel.textColor = .gray
+        footerLabel.textAlignment = .center
+        footerLabel.frame = footerView.bounds
+        footerView.addSubview(footerLabel)
+        
+        self.taskListTableView.tableFooterView = footerView
     }
 
 }
