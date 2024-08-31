@@ -16,7 +16,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         LocalNotificationManager.shared.requestNotificationPermission()
+        if let shortcutItem = launchOptions?[.shortcutItem] as? UIApplicationShortcutItem {
+            _ = handleShortcutItem(shortcutItem)
+            return false
+        }
         return true
+    }
+    
+    // Mark: Shortcut
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        let handled = handleShortcutItem(shortcutItem)
+        completionHandler(handled)
+    }
+    
+    private func handleShortcutItem(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
+        guard let shortcutType = shortcutItem.type as String? else { return false }
+        
+        switch shortcutType {
+        case "Rahul-Anand.Task-Master":
+            if let rootViewController = window?.rootViewController as? UINavigationController,
+               let taskListVC = rootViewController.viewControllers.first as? TaskListViewController {
+                // Here you can navigate to the Add Task screen
+                let addTaskViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddTaskViewController") as! AddAndEditTaskViewController
+                addTaskViewController.setNavigationItemsTitle(navigationTitle: "Add Tasks")
+                rootViewController.pushViewController(addTaskViewController, animated: true)
+                return true
+            }
+        default:
+            return false
+        }
+        return false
     }
 
     // MARK: UISceneSession Lifecycle
