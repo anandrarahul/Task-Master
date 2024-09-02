@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SortByDelegate: NSObject {
-    func sortBySelectedType()
+    func sortBySelectedType(sortByType: String)
 }
 
 class SortByListViewController: UIViewController {
@@ -20,8 +20,15 @@ class SortByListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Sort By"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(self.saveButtonTapped))
         self.sortByTableView.dataSource = self
         self.sortByTableView.delegate = self
+    }
+    
+    @objc func saveButtonTapped() {
+        self.sortByDelegate?.sortBySelectedType(sortByType: "A-Z")
+        print("Save Button Tapped")
     }
 }
 

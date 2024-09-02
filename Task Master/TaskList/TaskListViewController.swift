@@ -23,6 +23,11 @@ class TaskListViewController: UIViewController {
     private var viewModel = TaskListViewModel()
     var canEditRow: Bool = true
     
+    @IBAction func sortByButtonTapped(_ sender: UIButton) {
+        let sortByListViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SortByListViewController") as! SortByListViewController
+        self.navigationController?.pushViewController(sortByListViewController, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Tasks"
