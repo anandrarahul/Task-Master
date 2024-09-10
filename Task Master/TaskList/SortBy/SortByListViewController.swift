@@ -8,14 +8,19 @@
 import UIKit
 
 protocol SortByDelegate: NSObject {
-    func sortBySelectedType(sortByType: String)
+    func sortBySelectedType(sortByType: SortByType)
+}
+
+enum SortByType: String, CaseIterable {
+    case aToZ = "A-Z"
+    case zToA = "Z-A"
+    case recentlyAdded = "Recently Added"
 }
 
 class SortByListViewController: UIViewController {
     
     @IBOutlet weak var sortByTableView: UITableView!
-    var sortByType = ["A-Z", "Z-A", "Date Added"]
-    var secletedRow = 2
+    var secletedRow: SortByType?
     weak var sortByDelegate: SortByDelegate?
     
     override func viewDidLoad() {
@@ -27,24 +32,42 @@ class SortByListViewController: UIViewController {
     }
     
     @objc func saveButtonTapped() {
-        self.sortByDelegate?.sortBySelectedType(sortByType: "A-Z")
-        print("Save Button Tapped")
+        if let sortByRow = self.secletedRow {
+            self.sortByDelegate?.sortBySelectedType(sortByType: sortByRow)
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }
 
 extension SortByListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.sortByType.count
+        SortByType.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.sortByTableView.dequeueReusableCell(withIdentifier: "SortByTableViewCell", for: indexPath) as! SortByTableViewCell
-        cell.setTitleForSortByCell(sortBy: self.sortByType[indexPath.row], isSelected: indexPath.row == secletedRow)
+        let taskRow = SortByType.allCases[indexPath.row]
+        let isSelected = (taskRow == self.secletedRow)
+        cell.setTitleForSortByCell(sortBy: taskRow, isSelected: isSelected)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.sortByTableView.deselectRow(at: indexPath, animated: true)
+        let selectedSortType = SortByType.allCases[indexPath.row]
         
+        if let previousSelectedSortType = secletedRow,
+           let previousSelectedRow = SortByType.allCases.firstIndex(of: previousSelectedSortType) {
+            let previousSelectedIndexPath = IndexPath(row: previousSelectedRow, section: 0)
+            if let previousSelectedCell = tableView.cellForRow(at: previousSelectedIndexPath) as? SortByTableViewCell {
+                previousSelectedCell.removeSelectionOfCell()
+            }
+        }
+        
+        let selectedCell = self.sortByTableView.cellForRow(at: indexPath) as? SortByTableViewCell
+        selectedCell?.setSelectedCell()
+        
+        self.secletedRow = selectedSortType
     }
 }

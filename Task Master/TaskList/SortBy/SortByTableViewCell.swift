@@ -12,18 +12,21 @@ class SortByTableViewCell: UITableViewCell {
     @IBOutlet weak var sortByLabel: UILabel!
     @IBOutlet weak var sortByCellSelected: UIImageView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-    }
-    
-    func setTitleForSortByCell(sortBy: String, isSelected: Bool) {
-        self.sortByLabel.text = sortBy
+    func setTitleForSortByCell(sortBy: SortByType, isSelected: Bool) {
+        self.sortByLabel.text = sortBy.rawValue
         if isSelected == true {
             self.sortByCellSelected.image = UIImage(named: "tick")
         } else {
-            self.sortByCellSelected.image = UIImage(named: "")
+            self.sortByCellSelected.image = nil
         }
+    }
+    
+    func setSelectedCell() {
+        self.sortByCellSelected.image = UIImage(named: "tick")
+    }
+    
+    func removeSelectionOfCell() {
+        self.sortByCellSelected.image = nil
     }
 
 }

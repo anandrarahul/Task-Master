@@ -22,9 +22,13 @@ class TaskListViewController: UIViewController {
     private var searchDebouncer: SearchDebouncer!
     private var viewModel = TaskListViewModel()
     var canEditRow: Bool = true
+    var sortingScreenDismissed: Bool = false
+    var sortBySelectedCell: SortByType = .recentlyAdded
     
     @IBAction func sortByButtonTapped(_ sender: UIButton) {
         let sortByListViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SortByListViewController") as! SortByListViewController
+        sortByListViewController.sortByDelegate = self
+        sortByListViewController.secletedRow = sortBySelectedCell
         self.navigationController?.pushViewController(sortByListViewController, animated: true)
     }
     
@@ -45,8 +49,12 @@ class TaskListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.viewModel.fetchTasks()
-        self.taskListTableView.reloadData()
+        if self.sortingScreenDismissed == false {
+            self.viewModel.fetchTasks()
+            self.taskListTableView.reloadData()
+        } else {
+            self.sortingScreenDismissed = false
+        }
     }
     
     private func addDoneButtonToToolBar() {
@@ -186,6 +194,16 @@ extension TaskListViewController: SaveDetailsDelegate {
         self.viewModel.fetchTasks()
         self.taskListTableView.reloadData()
     }
+}
+
+extension TaskListViewController: SortByDelegate {
+    func sortBySelectedType(sortByType: SortByType) {
+        self.viewModel.sortBySelectedType(sortByType: sortByType)
+        self.sortBySelectedCell = sortByType
+        self.sortingScreenDismissed = true
+        self.taskListTableView.reloadData()
+    }
+    
 }
 
 extension TaskListViewController: UISearchBarDelegate {

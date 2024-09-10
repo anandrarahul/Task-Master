@@ -530,7 +530,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = D2S8HKH64R;
+				DEVELOPMENT_TEAM = 3542322UV9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Task Master/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
@@ -559,7 +559,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = D2S8HKH64R;
+				DEVELOPMENT_TEAM = 3542322UV9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Task Master/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
