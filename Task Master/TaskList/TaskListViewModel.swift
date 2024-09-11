@@ -25,12 +25,28 @@ class TaskListViewModel {
         let allTasks = coreDataManager.fetchAllTasks()
         for task in allTasks {
             if task.taskStatus == "Done" {
-                self.doneTaskDetailsList.append(task)
+                self.doneTaskDetailsList.insert(task, at: 0)
             } else if let timeInterval = self.timeIntervalBetweenCurrentDateAnd(dateString: task.taskDeadline!), timeInterval < 0 {
-                self.deadlineMissedTaskDetailsList.append(task)
+                self.deadlineMissedTaskDetailsList.insert(task, at: 0)
             } else if task.taskStatus == "To Do" {
-                self.toDoTaskDetailsList.append(task)
+                self.toDoTaskDetailsList.insert(task, at: 0)
             }
+        }
+    }
+    
+    func sortBySelectedType(sortByType: SortByType) {
+        if sortByType.rawValue == "A-Z" {
+            self.toDoTaskDetailsList = self.toDoTaskDetailsList.sorted(by: { $0.taskTitle! < $1.taskTitle! })
+            self.doneTaskDetailsList = self.doneTaskDetailsList.sorted(by: { $0.taskTitle! < $1.taskTitle! })
+            self.deadlineMissedTaskDetailsList = self.deadlineMissedTaskDetailsList.sorted(by: { $0.taskTitle! < $1.taskTitle! })
+        } else if sortByType.rawValue == "Z-A" {
+            self.toDoTaskDetailsList = self.toDoTaskDetailsList.sorted(by: { $0.taskTitle! > $1.taskTitle! })
+            self.doneTaskDetailsList = self.doneTaskDetailsList.sorted(by: { $0.taskTitle! > $1.taskTitle! })
+            self.deadlineMissedTaskDetailsList = self.deadlineMissedTaskDetailsList.sorted(by: { $0.taskTitle! > $1.taskTitle! })
+        } else if sortByType.rawValue == "Recently Added" {
+            self.toDoTaskDetailsList = self.toDoTaskDetailsList.sorted(by: { $0.taskDeadline! > $1.taskDeadline! })
+            self.doneTaskDetailsList = self.doneTaskDetailsList.sorted(by: { $0.taskDeadline! > $1.taskDeadline! })
+            self.deadlineMissedTaskDetailsList = self.deadlineMissedTaskDetailsList.sorted(by: { $0.taskDeadline! > $1.taskDeadline! })
         }
     }
     
