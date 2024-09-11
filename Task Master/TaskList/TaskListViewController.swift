@@ -25,6 +25,9 @@ class TaskListViewController: UIViewController {
     var sortingScreenDismissed: Bool = false
     var sortBySelectedCell: SortByType = .recentlyAdded
     
+    @IBAction func filterByButtonTapped(_ sender: UIButton) {
+    }
+    
     @IBAction func sortByButtonTapped(_ sender: UIButton) {
         let sortByListViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SortByListViewController") as! SortByListViewController
         sortByListViewController.sortByDelegate = self

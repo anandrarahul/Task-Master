@@ -49,28 +49,43 @@
                             <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g97-bU-0Cy">
                                 <rect key="frame" x="0.0" y="159" width="393" height="44"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nr6-1s-h0S">
-                                        <rect key="frame" x="293" y="4.6666666666666572" width="80" height="35"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="verticalLine" translatesAutoresizingMaskIntoConstraints="NO" id="DrR-bm-J7u">
+                                        <rect key="frame" x="186.66666666666666" y="0.0" width="20" height="44"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="V5d-jD-NAh"/>
+                                            <constraint firstAttribute="width" constant="20" id="eVb-U6-Bl1"/>
                                         </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dxt-vN-Uig">
+                                        <rect key="frame" x="0.0" y="0.0" width="186.66666666666666" height="44"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="tinted" title="Sort By"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <integer key="value" value="20"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
+                                        <buttonConfiguration key="configuration" style="plain" title="Filter"/>
                                         <connections>
-                                            <action selector="sortByButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wA0-Zn-uC5"/>
+                                            <action selector="filterByButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3iR-21-CUy"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fvm-MU-lgF">
+                                        <rect key="frame" x="206.66666666666663" y="0.0" width="186.33333333333337" height="44"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Sort By"/>
+                                        <connections>
+                                            <action selector="sortByButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ENe-Gf-p8U"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Nr6-1s-h0S" secondAttribute="trailing" constant="20" id="8cr-sD-Vl6"/>
+                                    <constraint firstAttribute="bottom" secondItem="DrR-bm-J7u" secondAttribute="bottom" id="4j2-KD-Y9h"/>
+                                    <constraint firstItem="fvm-MU-lgF" firstAttribute="top" secondItem="g97-bU-0Cy" secondAttribute="top" id="AsJ-YZ-3HQ"/>
                                     <constraint firstAttribute="height" constant="44" id="C1h-t3-5I7"/>
-                                    <constraint firstItem="Nr6-1s-h0S" firstAttribute="centerY" secondItem="g97-bU-0Cy" secondAttribute="centerY" id="CRn-ak-s3z"/>
+                                    <constraint firstAttribute="bottom" secondItem="Dxt-vN-Uig" secondAttribute="bottom" id="CvP-aH-qZD"/>
+                                    <constraint firstItem="Dxt-vN-Uig" firstAttribute="top" secondItem="g97-bU-0Cy" secondAttribute="top" id="D0K-Xj-jkM"/>
+                                    <constraint firstItem="DrR-bm-J7u" firstAttribute="leading" secondItem="Dxt-vN-Uig" secondAttribute="trailing" id="adW-Xs-DRr"/>
+                                    <constraint firstItem="Dxt-vN-Uig" firstAttribute="leading" secondItem="g97-bU-0Cy" secondAttribute="leading" id="gJK-GL-ezG"/>
+                                    <constraint firstItem="DrR-bm-J7u" firstAttribute="centerX" secondItem="g97-bU-0Cy" secondAttribute="centerX" id="gif-IQ-tgq"/>
+                                    <constraint firstItem="fvm-MU-lgF" firstAttribute="leading" secondItem="DrR-bm-J7u" secondAttribute="trailing" id="hfg-4m-HWU"/>
+                                    <constraint firstItem="DrR-bm-J7u" firstAttribute="top" secondItem="g97-bU-0Cy" secondAttribute="top" id="kTi-Ww-oeM"/>
+                                    <constraint firstAttribute="trailing" secondItem="fvm-MU-lgF" secondAttribute="trailing" id="rA7-Jr-hz1"/>
+                                    <constraint firstAttribute="bottom" secondItem="fvm-MU-lgF" secondAttribute="bottom" id="yEx-Jb-S6b"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -102,7 +117,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="146" y="-2"/>
+            <point key="canvasLocation" x="145.80152671755724" y="-2.1126760563380285"/>
         </scene>
         <!--Sort By List View Controller-->
         <scene sceneID="A0L-E5-xhA">
@@ -261,6 +276,7 @@
     </scenes>
     <resources>
         <image name="endlessRoad" width="1024" height="772"/>
+        <image name="verticalLine" width="33.333332061767578" height="33.333332061767578"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
