@@ -17,7 +17,7 @@ enum SortByType: String, CaseIterable {
     case recentlyAdded = "Recently Added"
 }
 
-class SortByListViewController: UIViewController {
+class SortAndFilterByListViewController: UIViewController {
     
     @IBOutlet weak var sortByTableView: UITableView!
     var secletedRow: SortByType?
@@ -39,14 +39,14 @@ class SortByListViewController: UIViewController {
     }
 }
 
-extension SortByListViewController: UITableViewDataSource, UITableViewDelegate {
+extension SortAndFilterByListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         SortByType.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.sortByTableView.dequeueReusableCell(withIdentifier: "SortByTableViewCell", for: indexPath) as! SortByTableViewCell
+        let cell = self.sortByTableView.dequeueReusableCell(withIdentifier: "SortAndFilterByTableViewCell", for: indexPath) as! SortAndFilterByTableViewCell
         let taskRow = SortByType.allCases[indexPath.row]
         let isSelected = (taskRow == self.secletedRow)
         cell.setTitleForSortByCell(sortBy: taskRow, isSelected: isSelected)
@@ -60,12 +60,12 @@ extension SortByListViewController: UITableViewDataSource, UITableViewDelegate {
         if let previousSelectedSortType = secletedRow,
            let previousSelectedRow = SortByType.allCases.firstIndex(of: previousSelectedSortType) {
             let previousSelectedIndexPath = IndexPath(row: previousSelectedRow, section: 0)
-            if let previousSelectedCell = tableView.cellForRow(at: previousSelectedIndexPath) as? SortByTableViewCell {
+            if let previousSelectedCell = tableView.cellForRow(at: previousSelectedIndexPath) as? SortAndFilterByTableViewCell {
                 previousSelectedCell.removeSelectionOfCell()
             }
         }
         
-        let selectedCell = self.sortByTableView.cellForRow(at: indexPath) as? SortByTableViewCell
+        let selectedCell = self.sortByTableView.cellForRow(at: indexPath) as? SortAndFilterByTableViewCell
         selectedCell?.setSelectedCell()
         
         self.secletedRow = selectedSortType

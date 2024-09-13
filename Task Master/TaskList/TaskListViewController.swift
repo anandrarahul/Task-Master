@@ -26,10 +26,14 @@ class TaskListViewController: UIViewController {
     var sortBySelectedCell: SortByType = .recentlyAdded
     
     @IBAction func filterByButtonTapped(_ sender: UIButton) {
+        let filterByListViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SortAndFilterByListViewController") as! SortAndFilterByListViewController
+//        filterByListViewController.sortByDelegate = self
+//        filterByListViewController.secletedRow = sortBySelectedCell
+        self.navigationController?.pushViewController(filterByListViewController, animated: true)
     }
     
     @IBAction func sortByButtonTapped(_ sender: UIButton) {
-        let sortByListViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SortByListViewController") as! SortByListViewController
+        let sortByListViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SortAndFilterByListViewController") as! SortAndFilterByListViewController
         sortByListViewController.sortByDelegate = self
         sortByListViewController.secletedRow = sortBySelectedCell
         self.navigationController?.pushViewController(sortByListViewController, animated: true)
@@ -98,9 +102,17 @@ class TaskListViewController: UIViewController {
         footerLabel.textColor = .gray
         footerLabel.textAlignment = .center
         footerLabel.frame = footerView.bounds
+        let eightTapGesture = UITapGestureRecognizer(target: self, action: #selector(footerViewTapped))
+        eightTapGesture.numberOfTapsRequired = 8
+        footerView.addGestureRecognizer(eightTapGesture)
         footerView.addSubview(footerLabel)
         
         self.taskListTableView.tableFooterView = footerView
+    }
+    
+    @objc private func footerViewTapped() {
+        let loginViewController = UIStoryboard(name: "ProtectedScreen", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        self.navigationController?.pushViewController(loginViewController, animated: true)
     }
 
 }

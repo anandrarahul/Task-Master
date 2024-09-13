@@ -1,5 +1,5 @@
 //
-//  SortByTableViewCell.swift
+//  SortAndFilterByTableViewCell.swift
 //  Task Master
 //
 //  Created by Rahul Anand on 02/09/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SortByTableViewCell: UITableViewCell {
+class SortAndFilterByTableViewCell: UITableViewCell {
 
     @IBOutlet weak var sortByLabel: UILabel!
     @IBOutlet weak var sortByCellSelected: UIImageView!

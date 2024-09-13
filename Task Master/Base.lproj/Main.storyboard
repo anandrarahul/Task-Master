@@ -33,10 +33,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="endlessRoad" translatesAutoresizingMaskIntoConstraints="NO" id="zLT-Ch-fNx">
-                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="684"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="QKF-mf-FLN">
-                                <rect key="frame" x="0.0" y="203" width="393" height="615"/>
+                                <rect key="frame" x="0.0" y="159" width="393" height="628"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <searchBar contentMode="redraw" placeholder="Search Tasks" translatesAutoresizingMaskIntoConstraints="NO" id="DhP-M8-Bax">
@@ -47,16 +47,17 @@
                                 </connections>
                             </searchBar>
                             <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g97-bU-0Cy">
-                                <rect key="frame" x="0.0" y="159" width="393" height="44"/>
+                                <rect key="frame" x="0.0" y="787" width="393" height="65"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="verticalLine" translatesAutoresizingMaskIntoConstraints="NO" id="DrR-bm-J7u">
-                                        <rect key="frame" x="186.66666666666666" y="0.0" width="20" height="44"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="verticalLine" translatesAutoresizingMaskIntoConstraints="NO" id="DrR-bm-J7u">
+                                        <rect key="frame" x="186.66666666666666" y="0.0" width="20" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="eVb-U6-Bl1"/>
                                         </constraints>
+                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dxt-vN-Uig">
-                                        <rect key="frame" x="0.0" y="0.0" width="186.66666666666666" height="44"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="186.66666666666666" height="65"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Filter"/>
                                         <connections>
@@ -64,7 +65,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fvm-MU-lgF">
-                                        <rect key="frame" x="206.66666666666663" y="0.0" width="186.33333333333337" height="44"/>
+                                        <rect key="frame" x="206.66666666666663" y="0.0" width="186.33333333333337" height="65"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Sort By"/>
                                         <connections>
@@ -74,9 +75,9 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="DrR-bm-J7u" secondAttribute="bottom" id="4j2-KD-Y9h"/>
+                                    <constraint firstAttribute="bottom" secondItem="DrR-bm-J7u" secondAttribute="bottom" constant="20" id="4j2-KD-Y9h"/>
                                     <constraint firstItem="fvm-MU-lgF" firstAttribute="top" secondItem="g97-bU-0Cy" secondAttribute="top" id="AsJ-YZ-3HQ"/>
-                                    <constraint firstAttribute="height" constant="44" id="C1h-t3-5I7"/>
+                                    <constraint firstAttribute="height" constant="65" id="C1h-t3-5I7"/>
                                     <constraint firstAttribute="bottom" secondItem="Dxt-vN-Uig" secondAttribute="bottom" id="CvP-aH-qZD"/>
                                     <constraint firstItem="Dxt-vN-Uig" firstAttribute="top" secondItem="g97-bU-0Cy" secondAttribute="top" id="D0K-Xj-jkM"/>
                                     <constraint firstItem="DrR-bm-J7u" firstAttribute="leading" secondItem="Dxt-vN-Uig" secondAttribute="trailing" id="adW-Xs-DRr"/>
@@ -94,18 +95,17 @@
                         <constraints>
                             <constraint firstItem="zLT-Ch-fNx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="8dE-Ij-XHe"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="g97-bU-0Cy" secondAttribute="trailing" id="IhI-6R-KVl"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="zLT-Ch-fNx" secondAttribute="bottom" id="QXF-Cv-HrL"/>
+                            <constraint firstItem="g97-bU-0Cy" firstAttribute="top" secondItem="zLT-Ch-fNx" secondAttribute="bottom" id="QXF-Cv-HrL"/>
                             <constraint firstItem="DhP-M8-Bax" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="RTQ-ib-rLM"/>
                             <constraint firstItem="zLT-Ch-fNx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="YzM-qc-8Am"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zLT-Ch-fNx" secondAttribute="trailing" id="Zvv-ib-HiT"/>
-                            <constraint firstItem="g97-bU-0Cy" firstAttribute="top" secondItem="DhP-M8-Bax" secondAttribute="bottom" id="bcP-gk-Bzo"/>
+                            <constraint firstItem="g97-bU-0Cy" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="bcP-gk-Bzo"/>
                             <constraint firstItem="g97-bU-0Cy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="dsu-pN-f5h"/>
                             <constraint firstItem="DhP-M8-Bax" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="hxc-yT-HeE"/>
                             <constraint firstItem="QKF-mf-FLN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ijy-Kk-iCU"/>
-                            <constraint firstItem="QKF-mf-FLN" firstAttribute="top" relation="greaterThanOrEqual" secondItem="DhP-M8-Bax" secondAttribute="bottom" id="lAM-ly-Rb9"/>
+                            <constraint firstItem="QKF-mf-FLN" firstAttribute="top" secondItem="DhP-M8-Bax" secondAttribute="bottom" id="lAM-ly-Rb9"/>
                             <constraint firstItem="DhP-M8-Bax" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="rHu-y3-j2c"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="QKF-mf-FLN" secondAttribute="bottom" id="t5F-Es-Akx"/>
-                            <constraint firstItem="g97-bU-0Cy" firstAttribute="bottom" secondItem="QKF-mf-FLN" secondAttribute="top" id="vRK-xe-WPo"/>
+                            <constraint firstItem="g97-bU-0Cy" firstAttribute="top" secondItem="QKF-mf-FLN" secondAttribute="bottom" id="t5F-Es-Akx"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="QKF-mf-FLN" secondAttribute="trailing" id="xaV-wu-Jj6"/>
                         </constraints>
                     </view>
@@ -119,10 +119,10 @@
             </objects>
             <point key="canvasLocation" x="145.80152671755724" y="-2.1126760563380285"/>
         </scene>
-        <!--Sort By List View Controller-->
+        <!--Sort And Filter By List View Controller-->
         <scene sceneID="A0L-E5-xhA">
             <objects>
-                <viewController storyboardIdentifier="SortByListViewController" id="Hfo-cj-lrU" customClass="SortByListViewController" customModule="Task_Master" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SortAndFilterByListViewController" id="Hfo-cj-lrU" customClass="SortAndFilterByListViewController" customModule="Task_Master" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9tA-7n-tB7">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -131,7 +131,7 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SortByTableViewCell" rowHeight="60" id="ZwY-fY-FeG" customClass="SortByTableViewCell" customModule="Task_Master" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SortAndFilterByTableViewCell" rowHeight="60" id="ZwY-fY-FeG" customClass="SortAndFilterByTableViewCell" customModule="Task_Master" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZwY-fY-FeG" id="1O2-A0-pa4">
